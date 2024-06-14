@@ -1,0 +1,44 @@
+%sql
+select * from CogsleyServices_SalesData_US
+
+## Run SQL command using SparkSQL
+df = spark.sql("select * from CogsleyServices_SalesData_US") 
+display(df)
+
+## Distinct list of regions using pySpark 
+display( 
+	df
+		.select("Region")
+		.distinct()
+		.orderBy("Region")
+)
+
+%sql
+-- Distinct list of regions using SparkSQL 
+select distinct region 
+from CogsleyServices_SalesData_US
+order by region
+
+
+
+## Simple aggregation using pySpark
+display(
+	df
+		.select(df["OrderID"],df["SaleAmount"])
+		.groupBy("OrderID")
+        	.sum("SaleAmount")
+)
+
+%sql
+-- Simple aggregation using SparkSQL
+select OrderID, sum(SaleAmount) as OrderTotal 
+from CogsleyServices_SalesData_US
+group by OrderID
+
+
+
+
+
+
+
+

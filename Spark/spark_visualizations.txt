@@ -1,0 +1,21 @@
+%sql
+-- sales trend
+select OrderMonthYear, sum(SaleAmount) Sales 
+from CogsleyServices_SalesData_US
+group by OrderMonthYear
+
+%sql
+-- top customers
+select CustomerName, sum(SaleAmount) TotalSales 
+from CogsleyServices_SalesData_US
+group by CustomerName
+order by 2 desc 
+limit 10
+
+%sql
+-- top product categories
+select ProductCategory, sum(SaleAmount) TotalSales
+from CogsleyServices_SalesData_US
+group by ProductCategory
+order by 2 desc
+limit 10
